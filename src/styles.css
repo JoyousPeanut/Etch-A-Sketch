@@ -1,5 +1,8 @@
 body {
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 .content {
@@ -15,10 +18,16 @@ body {
 #container {
   justify-content: center;
   display: grid;
-  grid-template-rows: repeat(16, 55px);
-  grid-template-columns: repeat(16, 55px);
+  grid-gap: 1px;
+  width: 30%;
+  height: 30%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .etchHead {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  text-align: center;
+  background-color: antiquewhite;
 }
