@@ -20,13 +20,9 @@ etch();
 
 // Button, needs to reset board
 clearButton.addEventListener("click", (event) => {
-  const blueItems = document.getElementsByClassName("blue-etch");
-  for (let i = 0; i < blueItems.length; i++) {
-    blueItems.item(i).classList.remove("blue-etch");
+  const blueItems = document.getElementsByClassName("blue-etch"); // Gets all elements with ClassName
+  let blueItemsArr = [...blueItems]; // Converts HTML object to array
+  for (let i = 0; i < blueItemsArr.length; i++) {
+    blueItemsArr[i].classList.remove("blue-etch"); // Removes Etch Color
   }
 });
-
-// const content = document.createElement("div");
-// content.classList.add("content");
-
-// container.appendChild(content);
