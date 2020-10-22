@@ -6,9 +6,7 @@ body {
 }
 
 .content {
-  border: solid 2px;
-  height: 50px;
-  width: 50px;
+  border: solid 1px grey;
 }
 
 .blue-etch {
@@ -18,9 +16,9 @@ body {
 #container {
   justify-content: center;
   display: grid;
-  grid-gap: 1px;
-  width: 30%;
-  height: 30%;
+  border: solid 2px black;
+  width: 700px;
+  height: 700px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -30,4 +28,8 @@ body {
   padding-top: 1rem;
   text-align: center;
   background-color: antiquewhite;
+}
+
+#favcolor {
+  display: none;
 }

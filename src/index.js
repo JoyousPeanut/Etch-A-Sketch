@@ -1,18 +1,44 @@
 const gridContainer = document.querySelector("#container");
 const clearButton = document.getElementById("clearEtch");
 const newGridButton = document.getElementById("New Grid");
+const rainbow = document.getElementById("rainbow");
+const greyscale = document.getElementById("greyscale");
+const custom = document.getElementById("custom");
+const picker = document.getElementById("favcolor");
 
 function initEtchASketch() {
   let gridSize = 16;
+  // Colour Buttons
+  let brush = "rainbow";
 
-  const gridContainerSize = () => {
-    gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+  rainbow.addEventListener("click", () => {
+    brush = "rainbow";
+  });
+
+  greyscale.addEventListener("click", (event) => {
+    brush = "greyscale";
+  });
+
+  custom.addEventListener("click", (event) => {
+    brush = "custom";
+    picker.style.display = "inline-block";
+    console.log(picker.value);
+  });
+
+  // Ensures creating a new grid doesn't keep  the old one
+  const clearPreviousGrid = () => {
+    gridContainer.innerHTML = "";
+  };
+
+  const createGridDisplay = () => {
     gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+    gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
   };
 
   // Creates the initial Etch Board
   const etch = () => {
-    gridContainerSize();
+    clearPreviousGrid();
+    createGridDisplay();
     let content;
     for (let i = 0; i < gridSize ** 2; i++) {
       // Loops over to create grid
@@ -21,7 +47,21 @@ function initEtchASketch() {
       gridContainer.appendChild(content); // creates Boxes
       content.addEventListener("mouseover", (event) => {
         // Etches and Sketches
-        event.target.classList.add("blue-etch");
+        if (brush === "rainbow") {
+          let rgb = {
+            red: Math.floor(Math.random() * 255),
+            green: Math.floor(Math.random() * 255),
+            blue: Math.floor(Math.random() * 255)
+          };
+          event.target.style.backgroundColor = `rgb(${rgb.red}, ${rgb.green}, ${rgb.blue})`;
+        } else if (brush === "greyscale") {
+          let rgb = Math.floor(Math.random() * 256);
+          event.target.style.backgroundColor = `rgb(${rgb}, ${rgb}, ${rgb})`;
+        } else if (brush === "custom") {
+          event.target.style.backgroundColor = `${picker.value}`;
+        }
+
+        // event.target.classList.add("blue-etch");
       });
     }
   };
@@ -36,19 +76,13 @@ function initEtchASketch() {
     if (gridSize > 100 || gridSize < 2) {
       alert("Invalid! Please enter a number between 2 and 100");
     } else {
-      gridContainerSize();
       etch();
     }
   });
 
-  // Button, needs to reset board
-  clearButton.addEventListener("click", (event) => {
-    const blueItems = document.getElementsByClassName("blue-etch"); // Gets all elements with ClassName
-    let blueItemsArr = [...blueItems]; // Converts HTML object to array
-    for (let i = 0; i < blueItemsArr.length; i++) {
-      blueItemsArr[i].classList.remove("blue-etch"); // Removes Etch Color
-    }
-  });
+  clearButton.addEventListener("click", etch);
 }
 
 initEtchASketch();
+
+// Set Colour
