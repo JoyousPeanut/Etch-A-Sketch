@@ -19,10 +19,8 @@ function initEtchASketch() {
     brush = "greyscale";
   });
 
-  custom.addEventListener("click", (event) => {
+  picker.addEventListener("click", (event) => {
     brush = "custom";
-    picker.style.display = "inline-block";
-    console.log(picker.value);
   });
 
   // Ensures creating a new grid doesn't keep  the old one
